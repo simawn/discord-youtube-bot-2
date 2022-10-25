@@ -6,8 +6,12 @@ WORKDIR /home/node
 
 COPY --chown=node:node . .
 
-USER node
+RUN apk --no-cache --virtual build-dependencies add \
+	python3 \
+	make \
+	g++ \
+	&& npm i
 
-RUN npm i
+USER node
 
 CMD ["npm", "run", "bot"];
